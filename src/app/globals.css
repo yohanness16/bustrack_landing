@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+:root {
+  --bg-deep: oklch(0.14 0.01 260);
+  --bg: oklch(0.16 0.01 260);
+  --bg-surface: oklch(0.20 0.01 260);
+  --bg-elevated: oklch(0.24 0.015 260);
+  --fg-primary: oklch(0.92 0.005 60);
+  --fg-secondary: oklch(0.72 0.01 260);
+  --fg-tertiary: oklch(0.48 0.01 260);
+  --fg-inverse: oklch(0.14 0.01 260);
+  --accent: oklch(0.68 0.14 55);
+  --accent-light: oklch(0.78 0.12 60);
+  --accent-muted: oklch(0.35 0.06 55);
+  --accent-glow: oklch(0.68 0.14 55 / 0.15);
+  --ok: oklch(0.72 0.12 145);
+  --warn: oklch(0.82 0.10 80);
+  --no: oklch(0.65 0.15 25);
+  --border: oklch(0.28 0.01 260);
+  --border-light: oklch(0.24 0.01 260);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg-primary);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-accent-muted: var(--accent-muted);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-muted: var(--fg-secondary);
+  --color-dim: var(--fg-tertiary);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-no: var(--no);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--fg-primary);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-tertiary); }
+
+::selection { background: var(--accent-muted); color: var(--fg-primary); }
+
+@keyframes scrollDown {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(200%); opacity: 0.5; }
+  51% { transform: translateY(-200%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
